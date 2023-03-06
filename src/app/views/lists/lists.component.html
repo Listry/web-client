@@ -1,0 +1,24 @@
+<div>
+    <h2>Lists</h2>
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0" *ngFor="let list of (lists$ | async)">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <h5 class="mb-0">{{ list.name.value }}</h5>
+                            <small class="text-success">{{ list.id._value }}</small>
+                        </div>
+                        <div class="col-auto">
+                            <h4 class="mb-0">
+                                {{ list.invest
+                                }}<span class="ms-2 align-top avtar avtar-xxs {{ list.bgColor }}"><i
+                                        class="{{ list.icon }} {{ list.color }}"></i></span>
+                            </h4>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
