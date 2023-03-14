@@ -19,6 +19,8 @@ import { NavItemComponent } from './theme/layout/admin/navigation/nav-content/na
 import { SharedModule } from './theme/shared/shared.module';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { GuestComponent } from './theme/layout/guest/guest.component';
+import ListsComponent from './views/lists/lists.component';
+import { ListServiceService } from './services/list-service.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,9 +35,9 @@ import { GuestComponent } from './theme/layout/guest/guest.component';
     NavItemComponent,
     NavCollapseComponent,
     ConfigurationComponent,
-    GuestComponent  ],
+    GuestComponent ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule, HttpClientModule],
-  providers: [NavigationItem],
+  providers: [NavigationItem, ListServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

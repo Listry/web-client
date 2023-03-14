@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiServiceService } from './api-service.service';
 
 @Injectable({
@@ -12,13 +12,34 @@ export class ListServiceService implements OnInit {
   constructor(private apiService: ApiServiceService) { }
 
   ngOnInit(): void {
-    this.refreshLists();
   }
 
   refreshLists(): void {
     this.apiService.fetchLists()
       .subscribe((list) => {
+        console.log('Refreshing lists ... ', list);
         this.lists$.next(list);
       });
+  }
+
+  addList(addListsDto: {name?: string}): Observable<any> {
+    return this.apiService.addList(addListsDto)
+      .pipe(tap(listId => {
+        this.refreshLists();
+      }));
+  }
+
+  remove(listId: any): Observable<any> {
+    return this.apiService.remove(listId)
+    .pipe(tap(listId => {
+      this.refreshLists();
+    }));
+  }
+
+  updateList(list: any): Observable<any> {
+    return this.apiService.update(list)
+    .pipe(tap(listId => {
+      this.refreshLists();
+    }));
   }
 }
